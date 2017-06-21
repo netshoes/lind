@@ -1048,6 +1048,7 @@ figcaption {
   z-index: 999;
   display: block;
   height: 630px;
+  overflow: hidden;
 }
 
 .image_devices2 {
