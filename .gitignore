@@ -1,0 +1,9 @@
+.ftpauth
+.vscode
+.gitmodules
+package-lock.json
+yarn.lock
+dist/
+src/js/lind.js
+node_modules/
+npm-debug.log

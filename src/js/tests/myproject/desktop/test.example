@@ -1,0 +1,21 @@
+tests.example = {
+  name: "Example",
+  audience: 0,
+  exception: null,
+  triggerEvent: null,
+  createdAt: 20170622,
+  variants: {
+    variantA: {
+      name: "Example Default",
+      audience: 50,
+      method: function() {
+      }
+    },
+    variantB: {
+      name: "Example Changes",
+      audience: 50,
+      method: function() {
+      }
+    }
+  }
+};
