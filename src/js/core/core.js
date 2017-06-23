@@ -1,22 +1,22 @@
 var Lind = (function() {
-  
+
   if(!Object.keys(tests).length) {
     Cookie.clear();
     return false;
   }
-  
+
   var variantCookie  = Cookie.get(variantCookieName),
       delayedCookie  = Cookie.get(delayedCookieName),
       filteredCookie = Cookie.get(filteredCookieName),
       sortedTest,
       validFilter;
-  
+
   window.LindTests = tests;
-  
+
   var createVariantPosition = function(variantCookie){
     var variantPosition = false;
-    
-    if(!!variantCookie) {
+
+    if(variantCookie) {
       if(variantCookie.indexOf("limbo") > -1 ) {
         variantPosition = {
           "variantName": "limbo",
@@ -32,11 +32,11 @@ var Lind = (function() {
     }
     return variantPosition;
   };
-  
+
   var isVariantValid = function(variantPosition) {
     var isValid = false;
-    
-    if(!!variantPosition){
+
+    if(variantPosition){
       if( variantPosition.variantName != "limbo" && !tests.hasOwnProperty(variantPosition.testName)) {
         Cookie.destroy(variantCookieName);
         variantCookie = false;
@@ -45,9 +45,9 @@ var Lind = (function() {
     }
     return isValid;
   };
-  
+
   var runTest = function(testCase, key) {
-    
+
     if(typeof tests[key].rule == 'function') {
       document.querySelector('html').style.opacity = 0;
       document.addEventListener("DOMContentLoaded", function(event) {
@@ -58,9 +58,9 @@ var Lind = (function() {
       triggerEvent(testCase);
     }
   };
-  
+
   var triggerEvent = function(test) {
-    
+
     switch(test) {
       case 'validTest':
         if(Filter.valid(tests[variantPosition.testName].rule)) {
@@ -73,13 +73,13 @@ var Lind = (function() {
           var delayedsortedTest = tests[delayedCookie],
               delayedvariant = Sort.sortTest(delayedsortedTest.variants),
               delayedcookieValue = Cookie.name(delayedCookie, delayedvariant.key,delayedsortedTest.createdAt);
-              
+
           delayedvariant.method();
           Cookie.destroy(delayedCookieName);
           return Cookie.create(variantCookieName,delayedcookieValue);
         }
         break;
-      case 'sortNewTest':        
+      case 'sortNewTest':
         Cookie.clear();
 
         if(sortedTest && Filter.valid(sortedTest.rule) && validFilter) {
@@ -99,7 +99,7 @@ var Lind = (function() {
     }
     return false;
   };
-  
+
   var runValidTest = function() {
     if (variantPosition.variantName == "limbo") {
       return Cookie.update(variantCookieName, variantPosition.variantName);
@@ -107,35 +107,35 @@ var Lind = (function() {
       return runTest('validTest', variantPosition.testName);
     }
   };
-  
+
   var runDelayedTest = function(){
     runTest('delayedTest', delayedCookie);
   };
-  
+
   var runSortNewTest = function(){
     sortedTest = Sort.sortTest(tests);
     validFilter = Filter.valid(sortedTest.exception);
-    
+
     if(sortedTest.key == "withoutTest") {
       Cookie.create(filteredCookieName, "limbo", 1);
       filteredCookie = Cookie.get(filteredCookieName);
       validFilter = false;
       return false;
     }
-    
+
     runTest( 'sortNewTest',  sortedTest.key);
     return false;
   };
-    
+
   var variantPosition = createVariantPosition( variantCookie );
   variantPosition  = isVariantValid( variantPosition );
-  
-  if(!!variantPosition) {
+
+  if(variantPosition) {
     runValidTest();
   } else if(delayedCookie) {
     runDelayedTest();
   } else if(!variantCookie && !delayedCookie && !filteredCookie ) {
     runSortNewTest();
   }
-  
+
 })();
