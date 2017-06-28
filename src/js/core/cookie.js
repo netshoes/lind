@@ -12,11 +12,11 @@ var Cookie = (function() {
     var date = new Date();
     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
     var expires = "; expires=" + date.toGMTString();
-    document.cookie = name + "=" + value + expires + "; path=/";
+    document.cookie = name + "=" + value + expires + "; path=/; domain="+ getDomain();
   },
 
   destroy = function(name) {
-    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/";
+    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain="+ getDomain();
   },
 
   userKey = function(size) {
@@ -34,6 +34,12 @@ var Cookie = (function() {
     Cookie.destroy(delayedCookieName);
     Cookie.destroy(filteredCookieName);
   },
+
+  getDomain = function() {
+    fullDomain = window.location.host.split('.');
+    fullDomain.shift();
+    return '.' + fullDomain.join('.');
+  }
 
   name = function(testName, variantName, createdAt) {
     return "lind_" + testName + "_" + variantName + "_" + createdAt + "#" + userKey();
