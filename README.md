@@ -1,7 +1,7 @@
 ![](logo-lind.png)
 
 # O que é o Lind?
-
+Avoid HiPPO. Use Numbers. 
 O Lind é uma ferramenta de teste A/B desenvolvido totalmente com Javascript.
 
 ## Requisitos
