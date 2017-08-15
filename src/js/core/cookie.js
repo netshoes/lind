@@ -39,7 +39,7 @@ var Cookie = (function() {
     fullDomain = window.location.host.split('.');
     fullDomain.shift();
     return '.' + fullDomain.join('.');
-  }
+  },
 
   name = function(testName, variantName, createdAt) {
     return "lind_" + testName + "_" + variantName + "_" + createdAt + "#" + userKey();
