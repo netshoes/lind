@@ -79,13 +79,13 @@ name: "Teste Exemplo"
 
 #### audience {integer}
 
-Numero da audiência que será aplicada no teste. Números de 0 a 100.
+Número da audiência que será aplicada no teste. Números de 0 a 100.
 
 ```js
 audience: 50
 ```
 
-Obs: Somados com os outros testes não devem ultrapassar 100.
+Obs: Somada com os outros testes, a audiência não deve ultrapassar 100.
 
 #### exception {null|function}
 
@@ -105,7 +105,7 @@ exception: function() {
 
 #### rule {null|function}
 
-Determina a regra de acionamento da varição do teste. Enquanto `false`, o usuário não verá nenhuma variação do teste permanecendo com cookie de `delayed`. Caso retone `true`, ele será sorteado para as variações do teste.
+Determina a regra de acionamento da variação do teste. Enquanto `false`, o usuário não verá nenhuma variação do teste permanecendo com cookie de `delayed`. Caso retone `true`, ele será sorteado para as variações do teste.
 
 ```js
 // Null
@@ -173,7 +173,7 @@ variants: {
 }
 ```
 
-Obs: Somadads as variações de um teste não devem ultrapassar 100.
+Obs: As audiências somadas das variações de um teste não devem ultrapassar 100.
 
 ## Como usar
 
@@ -185,7 +185,7 @@ $ npm install
 
 ## Arquivos de desenvolvimento
 
-Antes se iniciar o desenvolvimento executar o comando:
+Antes de iniciar o desenvolvimento executar o comando:
 
 ```sh
 $ grunt core
@@ -237,7 +237,7 @@ Para realizar o upload automático para o servidor é necessário configurar na 
 
 Também é preciso configurar o `config.js` na raiz do projeto com os diretórios do projeto no FTP:
 
-```JS
+```js
 module.exports = {
   ftp_push_config: { // Configurações do FTP
     staging: {
@@ -258,7 +258,7 @@ module.exports = {
 
 Para funcionar corretamente é preciso que o usuário possua permissão para modificar o diretório do `Lind`.
 
-É preciso criar arquivo `.ftpauth` com os acessos do FTP. Utilize o modelo do `.ftpauth.example` como modelo.
+É preciso criar o arquivo `.ftpauth` com os acessos do FTP. Utilize o modelo do `.ftpauth.example` como exemplo.
 
 ### Comandos
 
@@ -270,7 +270,7 @@ grunt build:prod --project=NOMEDOPROJETO || grunt build:staging --project=NOMEDO
 
 É preciso realizar a configuração do path de js do dashboard em `/src/js/core/config.js`:
 
-```JS
+```js
 var CONFIG = {
   "cookieName": "lind_",
   "sortEmptyName": "withoutTest",
